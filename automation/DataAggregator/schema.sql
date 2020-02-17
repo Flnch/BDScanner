@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS site_visits (
     visit_id INTEGER PRIMARY KEY,
     crawl_id INTEGER NOT NULL,
     site_url VARCHAR(500) NOT NULL,
+    site_rank INTEGER,
     score DECIMAL,
     scriptId TEXT,
     cat_a INTEGER,
@@ -233,6 +234,16 @@ CREATE TABLE IF NOT EXISTS navigations(
   committed_time_stamp DATETIME
 );
 
+/*
+# Callstacks
+ */
+CREATE TABLE IF NOT EXISTS callstacks(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  request_id INTEGER NOT NULL,
+  crawl_id INTEGER NOT NULL,
+  visit_id INTEGER NOT NULL,
+  call_stack TEXT
+);
 
 /* Bot detection tables */
 CREATE TABLE IF NOT EXISTS Scripts (
@@ -257,7 +268,7 @@ CREATE TABLE IF NOT EXISTS DetectionPatterns (
     score DECIMAL,
     FOREIGN KEY(script_id) REFERENCES Scripts(id));
 
-CREATE INDEX IF NOT EXISTS hash_index ON Scripts (hash)
+CREATE INDEX IF NOT EXISTS hash_index ON Scripts (hash);
 
 /*CREATE TABLE IF NOT EXISTS HoneypotElements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
