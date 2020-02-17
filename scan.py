@@ -24,7 +24,7 @@ manager_params['log_directory'] = './Results/'
 # Instantiates the measurement platform
 manager = TaskManager.TaskManager(manager_params, browser_params)
 
-fileReader = csv.reader(open('detection/alexa/test_set.csv'), delimiter=',')
+fileReader = csv.reader(open('detection/tranco/tranco_LNN4-1m_top-3k.csv'), delimiter=',')
 
 urls = []
 for (index, url) in fileReader:
